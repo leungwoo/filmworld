@@ -1,18 +1,24 @@
 module.exports = {
-  env: {
-    browser: true,
-    es2021: true,
-  },
+  parser: 'babel-eslint',
   extends: [
     'plugin:react/recommended',
     'airbnb',
   ],
+  env: {
+    browser: true,
+    es6: true,
+  },
   parserOptions: {
+    ecmaVersion: 2021,
+    sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 'latest',
-    sourceType: 'module',
+  },
+  settings: {
+    react: {
+      version: 'detect',
+    },
   },
   plugins: [
     'react',
@@ -78,3 +84,23 @@ module.exports = {
     ],
   },
 };
+
+
+// env: {
+//   browser: true,
+//   es2021: true,
+// },
+// extends: [
+//   'plugin:react/recommended',
+//   'airbnb',
+// ],
+// parserOptions: {
+//   ecmaFeatures: {
+//     jsx: true,
+//   },
+//   ecmaVersion: 'latest',
+//   sourceType: 'module',
+// },
+// plugins: [
+//   'react',
+// ],

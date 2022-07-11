@@ -4,10 +4,12 @@ import { Route, Switch } from 'react-router-dom';
 import useStyles from "./styles";
 
 import { Actors, Profile, NavBar, MovieInformation, Movies } from "./";
+
 const App = () => {
 	const classes = useStyles();
 	return (
 		<div className={classes.root}>
+
 			<CssBaseline />
 			<NavBar />
 			<main className={classes.content}>
