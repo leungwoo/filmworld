@@ -8,7 +8,7 @@ import { MovieList } from '..';
 
 const Movies = () => {
     const { data, isFetching, error } = useGetMoviesQuery();
-    console.log(data);
+    //console.log(data);
     if (isFetching) {
         return (
             <Box display='flex' justifyContent='center'>
