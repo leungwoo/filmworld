@@ -1,23 +1,26 @@
-import React, { useState, useEfect } from 'react';
-import { Box, CircularProgress, useMediaQuery, Typography } from "@mui/material";
+import React, { useState } from 'react';
+import { Box, CircularProgress, Typography } from "@mui/material";
 import { useSelector } from 'react-redux';
 
 import { useGetMoviesQuery } from '../../Services/TMDB';
 import { MovieList } from '..';
+import { selectGenreOrCategory } from '../../features/currentGenreOrCatergory';
 
 
 const Movies = () => {
-    const { data, isFetching, error } = useGetMoviesQuery();
-    //console.log(data);
-    if (isFetching) {
+    const [page, setPage] = useState(1);
+    const { genreIdOrCategoryName } = useSelector((state) => state.currentGenreOrCategory);
+    const { data, isFetching, error } = useGetMoviesQuery({ genreIdOrCategoryName, page });
+
+    if (isFetching)
         return (
             <Box display='flex' justifyContent='center'>
                 <CircularProgress size='4rem' />
             </Box>
         );
-    }
 
-    if (!data.results.length) {
+
+    if (!data.results.length)
         return (
             <Box display='flex' alignItems='center' mt='20px'>
                 <Typography variant='h4'>
@@ -27,7 +30,7 @@ const Movies = () => {
                 </Typography>
             </Box>
         );
-    }
+
     if (error) return 'An error has occured';
 
     return (

@@ -2,7 +2,7 @@ import React from 'react';
 
 const MovieInformation = () => {
     return (
-        <div>MovieInformation</div>
+        <div>Movie to show here</div>
     );
 };
 
