@@ -17,7 +17,7 @@ const categories = [
     { label: 'Upcoming', value: 'upcoming' },];
 
 const Sidebar = ({ setMobileOpen }) => {
-    const { genreIdOrCategoryName } = useSelector((state) => state.currentGenreOrCategory);
+    const { genreIdOrCategoryName } = useSelector((state) => state.currentGenreOrCategory);//getting a specific category
     const theme = useTheme();
     const classes = useStyles();
     const { data, isFetching } = useGetGenresQuery();
