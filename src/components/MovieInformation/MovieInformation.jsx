@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography, Button, ButtonGroup, Grid, Box, CircularProgress, Rating, useMediaQuery } from "@mui/material";
-import { Movie as Favorite, MovieIcon, Language, Theaters, PlusOne, FavoriteBorderOutlined } from '@mui/icons-material';
+import { Movie as MovieOutlined, Language, Theaters, PlusOne, FavoriteBorder, FavoriteOutlined, Remove, ArrowBack } from '@mui/icons-material';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
@@ -16,6 +16,15 @@ const MovieInformation = () => {
     const { data, isFetching, error } = useGetMovieQuery(id);
     const classes = useStyles();
     const dispatch = useDispatch();
+    const isMovieFavorited = false;
+    const isMovieWatchlisted = true;
+
+    const addToFavorites = () => {
+
+    };
+    const addToWatchlist = () => {
+
+    };
 
     if (isFetching) {
         return <Box display='flex' justifyContent='center' alignItems="center">
@@ -65,15 +74,37 @@ const MovieInformation = () => {
                 <Typography style={{ marginBottom: '2rem' }}>{data.overview}</Typography>
                 <Typography variant='h5' gutterBottom>Top Cast</Typography>
                 <Grid item container spacing={2} style={{ marginTop: '10px' }}>
-                    {data && data.credits.cast.slice(0, 6).map((character, i) => (
-                        character.profile_path && <Grid key={i} item xs={4} md={2} component={Link} to={`/actors/${character.id}`} style={{ textDecoration: 'none' }}>
-                            <img className={classes.castImage} src={`https://image.tmdb.org/t/p/w500/${character.profile_path}`} alt={character.name} />
-                            <Typography color='textPrimary' style={{ textDecoration: 'none', }} >{character.name}</Typography>
-                            <Typography color='textSecondary' variant='subtitle2'>{character.character}</Typography>
-                        </Grid>
+                    {data && data.credits.cast.slice(0, 6).map((character, i) =>
+                    (character.profile_path && <Grid key={i} item xs={4} md={2} component={Link} to={`/actors/${character.id}`} style={{ textDecoration: 'none' }}>
+                        <img className={classes.castImage} src={`https://image.tmdb.org/t/p/w500/${character.profile_path}`} alt={character.name} />
+                        <Typography color='textPrimary' style={{ textDecoration: 'none', }} >{character.name}</Typography>
+                        <Typography color='textSecondary' variant='subtitle2'>{character.character}</Typography>
+                    </Grid>
                     ))}</Grid>
+                <Grid item style={{ marginTop: '2rem' }}>
+                    <div className={classes.buttonContainer}>
+                        <Grid item sx={12} sm={6} className={classes.buttonContainer}>
+                            <ButtonGroup size='small' variant='outlined'>
+                                <Button target="_blank" rel='noopener noreferrer' href={data.homepage} endIcon={<Language />} >website</Button>
+                                <Button target="_blank" rel='noopener noreferrer' href={`https://imdb.com/title/${data.imdb_id}`} endIcon={<MovieOutlined />} >IMDB</Button>
+                                <Button onClick={() => { }} href='#' endIcon={<Theaters />}>Trailers</Button>
+                            </ButtonGroup>
+                        </Grid>
+                        <Grid item sx={12} sm={6} className={classes.buttonContainer}>
+                            <ButtonGroup size='medium' variant='outlined'>
+                                <Button onClick={addToFavorites} endIcon={isMovieFavorited ? <FavoriteOutlined /> : <FavoriteBorder />}>
+                                    {isMovieFavorited ? 'Unfavorited' : 'Favorite'}
+                                </Button>
+                                <Button onClick={addToWatchlist} endIcon={isMovieWatchlisted ? <Remove /> : <PlusOne />}>
+                                    WatchList</Button>
+                                <Button endIcon={<ArrowBack />} sx={{ borderColor: 'primary.main' }}>
+                                    <Typography variant='subtitle2' component={Link} to='/' color='inherit' style={{ textDecoration: 'none' }}>Back</Typography>
+                                </Button>
+                            </ButtonGroup>
+                        </Grid>
+                    </div>
+                </Grid>
             </Grid>
-
         </Grid>
     );
 };
