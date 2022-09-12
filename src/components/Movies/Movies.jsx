@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 
 import { useGetMoviesQuery } from '../../Services/TMDB';
 import { MovieList } from '..';
-import { selectGenreOrCategory } from '../../features/currentGenreOrCatergory';
 
 
 const Movies = () => {
