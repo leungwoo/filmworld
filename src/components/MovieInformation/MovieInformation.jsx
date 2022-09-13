@@ -1,5 +1,5 @@
-import React from 'react';
-import { Typography, Button, ButtonGroup, Grid, Box, CircularProgress, Rating, useMediaQuery } from "@mui/material";
+import React, { useState } from 'react';
+import { Modal, Typography, Button, ButtonGroup, Grid, Box, CircularProgress, Rating, useMediaQuery } from "@mui/material";
 import { Movie as MovieOutlined, Language, Theaters, PlusOne, FavoriteBorder, FavoriteOutlined, Remove, ArrowBack } from '@mui/icons-material';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,6 +20,8 @@ const MovieInformation = () => {
     const classes = useStyles();
     const isMovieFavorited = false;
     const isMovieWatchlisted = true;
+    const [open, setOpen] = useState(false);
+
 
     const addToFavorites = () => {
 
@@ -89,7 +91,7 @@ const MovieInformation = () => {
                             <ButtonGroup size='small' variant='outlined'>
                                 <Button target="_blank" rel='noopener noreferrer' href={data.homepage} endIcon={<Language />} >website</Button>
                                 <Button target="_blank" rel='noopener noreferrer' href={`https://imdb.com/title/${data.imdb_id}`} endIcon={<MovieOutlined />} >IMDB</Button>
-                                <Button onClick={() => { }} href='#' endIcon={<Theaters />}>Trailers</Button>
+                                <Button onClick={() => setOpen(true)} href='#' endIcon={<Theaters />}>Trailers</Button>
                             </ButtonGroup>
                         </Grid>
                         <Grid item sx={12} sm={6} className={classes.buttonContainer}>
@@ -110,9 +112,24 @@ const MovieInformation = () => {
             <Box marginTop='5rem' width='100%'>
                 <Typography variant='h3' gutterBottom align='center'>You might also like</Typography>
                 {recommendations ?
-                    <MovieList movies={recommendations} numberOfMovies={12} /> : <Box>Nothing was found</Box>}
-            </Box>
-        </Grid>
+                    <MovieList movies={recommendations} numberOfMovies={6} />
+                    : <Box>Nothing was found</Box>}
+            </Box>;
+            <Modal
+                closeAfteTransition
+                className={classes.modal}
+                open={open}
+                onClick={() => setOpen(false)}>
+                {data.videos.results.length > 0 &&
+                    <iframe
+                        autoPlay
+                        className={classes.video}
+                        title='Trailer'
+                        src={`https://www.youtube.com/embed/${data.videos.results[0].key}`}
+                        allow='autoplay'
+                    />}
+            </Modal>
+        </Grid >
     );
 };
 
