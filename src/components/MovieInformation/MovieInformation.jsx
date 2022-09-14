@@ -16,13 +16,14 @@ const MovieInformation = () => {
     const { id } = useParams();
     const { data, isFetching, error } = useGetMovieQuery(id);
     const dispatch = useDispatch();
-    const { data: recommendations, isFetching: isFetchingRecommendations } = useGetRecommendationsQuery({ movie_id: id, list: '/recommendations' });
+    const { data: recommendations, isFetching: isFetchingRecommendations }
+        = useGetRecommendationsQuery({ movie_id: id, list: '/recommendations' });
     const classes = useStyles();
     const isMovieFavorited = false;
     const isMovieWatchlisted = true;
     const [open, setOpen] = useState(false);
 
-
+    //console.log(recommendations);
     const addToFavorites = () => {
 
     };
@@ -40,7 +41,7 @@ const MovieInformation = () => {
             <Link to='/'> Something has gone wrong go back</Link>
         </Box>;
     }
-    console.log(recommendations);
+    // console.log(recommendations);
     return (
         <Grid container className={classes.containerSpaceAround}>
             <Grid item sm={12} lg={4} >
@@ -88,7 +89,7 @@ const MovieInformation = () => {
                 <Grid item style={{ marginTop: '2rem' }}>
                     <div className={classes.buttonContainer}>
                         <Grid item sx={12} sm={6} className={classes.buttonContainer}>
-                            <ButtonGroup size='small' variant='outlined'>
+                            <ButtonGroup size='medium' variant='outlined'>
                                 <Button target="_blank" rel='noopener noreferrer' href={data.homepage} endIcon={<Language />} >website</Button>
                                 <Button target="_blank" rel='noopener noreferrer' href={`https://imdb.com/title/${data.imdb_id}`} endIcon={<MovieOutlined />} >IMDB</Button>
                                 <Button onClick={() => setOpen(true)} href='#' endIcon={<Theaters />}>Trailers</Button>
@@ -129,7 +130,7 @@ const MovieInformation = () => {
                         allow='autoplay'
                     />}
             </Modal>
-        </Grid >
+        </Grid>
     );
 };
 
