@@ -26,7 +26,7 @@ const Actors = () => {
             <Button color='primary' startIcon={<ArrowBack />} onClick={() => history.goBack()} > go back</Button>
         </Box>;
     }
-    console.log(movies);
+    //console.log(movies);
     return (
 
         <>
@@ -75,7 +75,7 @@ const Actors = () => {
             <Pagination
                 currentPage={page}
                 setPage={setPage}
-            //totalPages={movies.total_pages}
+                totalPages={data.total_pages}
             />
         </>
     );
