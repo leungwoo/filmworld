@@ -15,15 +15,16 @@ export default makeStyles((theme) => ({
     poster: {
         borderRadius: '25px',
         boxShadow: '0.5em 1em 1em rgb(64,64,70)',
-        width: '80%',
+        width: '100%',
         [theme.breakpoints.down('md')]: {
             margin: '0 auto',
-            width: '50%',
-            heigth: '350px',
+            width: '300px',
+            marginBottom: '30px',
+            display: 'flex',
         },
         [theme.breakpoints.down('sm')]: {
             margin: '0 auto',
-            width: '100%',
+            width: '90%',
             heigth: '350px',
             marginBottom: '30px'
         },
@@ -55,7 +56,7 @@ export default makeStyles((theme) => ({
         borderRadius: '10px'
     },
     buttonContainer: {
-        display: 'flex',
+
         justifyContent: 'space-between',
         width: '100%',
         [theme.breakpoints.down('sm')]: {

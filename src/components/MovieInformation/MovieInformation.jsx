@@ -62,7 +62,7 @@ const MovieInformation = () => {
                         <Typography variant='subtitle1' gutterBottom style={{ marginLeft: '10px' }}>{data.vote_average}/10</Typography>
                     </Box>
                     <Typography variant='h6' align='center' gutterBottom>
-                        {data.runtime}mins |{data.spoken_languages[0].english_name}
+                        {data.runtime}mins | Language:{data.spoken_languages[0].english_name}
                     </Typography>
                 </Grid>
                 <Grid item className={classes.genresContainer}>
@@ -135,4 +135,3 @@ const MovieInformation = () => {
 };
 
 export default MovieInformation;
-{/* <Typography align='center' variant='h6' gutterBottom>{data.overview}</Typography> */ }
