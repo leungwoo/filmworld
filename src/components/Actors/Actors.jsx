@@ -1,21 +1,20 @@
-import React from 'react';
-import { Grid, Box, Typography, CircularProgress, Button, ButtonGroup } from '@mui/material';
-import { Link, useParams, useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Grid, Box, Typography, CircularProgress, Button } from '@mui/material';
+import { useParams, useHistory } from 'react-router-dom';
 import { useGetActorsDetailsQuery, useGetMoviesByActorIdQuery } from '../../Services/TMDB';
 import { ArrowBack, MovieOutlined } from '@mui/icons-material';
 import useStyles from './styles';
 import MovieList from '../MovieList/MovieList';
+import { Pagination } from '..';
 
 const Actors = () => {
-    const { id } = useParams(id);
+    const { id } = useParams();
     const history = useHistory();
     const classes = useStyles();
-    const page = 1;
+    const [page, setPage] = useState(1);
 
     const { data, isFetching, error } = useGetActorsDetailsQuery(id);
-
-
-    const { data: movies } = useGetMoviesByActorIdQuery({ id, page });
+    const { data: movies } = useGetMoviesByActorIdQuery({ actor_id: id, page });
 
     if (isFetching) {
         return <Box display='flex' justifyContent='center' alignItems="center">
@@ -27,7 +26,7 @@ const Actors = () => {
             <Button color='primary' startIcon={<ArrowBack />} onClick={() => history.goBack()} > go back</Button>
         </Box>;
     }
-
+    console.log(movies);
     return (
 
         <>
@@ -73,6 +72,11 @@ const Actors = () => {
                     <MovieList movies={movies} numberOfMovies={6} />
                 }
             </Box>
+            <Pagination
+                currentPage={page}
+                setPage={setPage}
+            //totalPages={movies.total_pages}
+            />
         </>
     );
 };

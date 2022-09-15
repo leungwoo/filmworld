@@ -1,7 +1,6 @@
 import React from 'react';
 import { Typography, Grid, Grow, Rating, Tooltip } from '@mui/material';
 import { Link } from 'react-router-dom';
-
 import useStyles from './styles';
 
 const Movie = ({ movie, i }) => {
