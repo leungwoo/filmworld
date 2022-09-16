@@ -146,7 +146,7 @@ const MovieInformation = () => {
                 className={classes.modal}
                 open={open}
                 onClick={() => setOpen(false)}>
-                {data.videos.results.length > 0 &&
+                {data?.videos?.results?.length > 0 &&
                     <iframe
                         autoPlay
                         className={classes.video}

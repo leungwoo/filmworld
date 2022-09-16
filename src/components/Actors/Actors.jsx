@@ -14,8 +14,8 @@ const Actors = () => {
     const [page, setPage] = useState(1);
 
     const { data, isFetching, error } = useGetActorsDetailsQuery(id);
-    const { data: movies } = useGetMoviesByActorIdQuery({ actor_id: id, page });
-
+    const { data: movies } = useGetMoviesByActorIdQuery({ id, page });
+    console.log(movies);
     if (isFetching) {
         return <Box display='flex' justifyContent='center' alignItems="center">
             <CircularProgress size='8rem' />
@@ -31,15 +31,15 @@ const Actors = () => {
 
         <>
             <Grid container spacing={3}>
-                <Grid item lg={5}>
+                <Grid item lg={5} xl={4}>
                     <img className={classes.image}
-                        src={`https://image.tmdb.org/t/p/w500/${data.profile_path}`}
-                        alt={data.name} />
+                        src={`https://image.tmdb.org/t/p/w780/${data?.profile_path}`}
+                        alt={data?.name} />
                 </Grid>
                 <Grid item direction='column' justifyContent='center' align='left' lg={7} style={{ display: 'flex', marginTop: '20px' }}>
                     <Typography variant='h2' gutterBottom>{data.name}</Typography>
                     <Grid item>
-                        <Typography variant='h5' gutterBottom>Born:{new Date(data.birthday).toDateString()}</Typography>
+                        <Typography variant='h5' gutterBottom>Born:{new Date(data?.birthday).toDateString()}</Typography>
                     </Grid>
                     <Grid item>
                         <Typography variant='body1' align='justify' paragraph>
@@ -52,7 +52,7 @@ const Actors = () => {
                             variant='contained'
                             target="_blank"
                             rel='noopener noreferrer'
-                            href={`https://www.imdb.com/name/${data.imdb_id}`}
+                            href={`https://www.imdb.com/name/${data?.imdb_id}`}
                             endIcon={<MovieOutlined />}>
                             IMDB
                         </Button>
@@ -75,7 +75,7 @@ const Actors = () => {
             <Pagination
                 currentPage={page}
                 setPage={setPage}
-                totalPages={data.total_pages}
+                totalPages={movies?.total_pages}
             />
         </>
     );

@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { CssBaseline } from '@mui/material';
 import { Route, Switch } from 'react-router-dom';
 import useStyles from "./styles";
+import useAlan from './Alan';
 
 import { Actors, Profile, NavBar, MovieInformation, Movies } from "./";
 
 const App = () => {
+	const alanBtnContainer = useRef();
+	useAlan(); //how to use the custom hook.
+
 	const classes = useStyles();
 	return (
 		<div className={classes.root}>
@@ -30,6 +34,7 @@ const App = () => {
 					</Switch>
 				</div>
 			</main>
+			<div ref={alanBtnContainer} />
 		</div>
 	);
 };
