@@ -7,6 +7,7 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
+    node: true,
   },
   parserOptions: {
     ecmaVersion: 2021,
@@ -24,6 +25,8 @@ module.exports = {
     'react',
   ],
   rules: {
+    'import/no-named-as-default': 0,
+    'import/no-named-as-default-member': 0,
     'react/react-in-jsx-scope': 0,
     'import/extensions': 0,
     'react/prop-types': 0,

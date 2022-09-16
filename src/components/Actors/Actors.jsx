@@ -26,7 +26,7 @@ const Actors = () => {
             <Button color='primary' startIcon={<ArrowBack />} onClick={() => history.goBack()} > go back</Button>
         </Box>;
     }
-    //console.log(movies);
+
     return (
 
         <>
