@@ -15,7 +15,7 @@ const Actors = () => {
 
     const { data, isFetching, error } = useGetActorsDetailsQuery(id);
     const { data: movies } = useGetMoviesByActorIdQuery({ id, page });
-    console.log(movies);
+
     if (isFetching) {
         return <Box display='flex' justifyContent='center' alignItems="center">
             <CircularProgress size='8rem' />
